@@ -65,12 +65,16 @@ def createFolderStructure():
 def downloadAudioHighestQuality(audio_link):
     #This function only gives you the highest quality audio (aac, flac, mp3, m4a, opus, vorbis, or wav)
     link = '"' + str(audio_link) + '"'
-    if sys.platform == "win32":
-        os.system('youtube-dl -i -f bestaudio --extract-audio --no-playlist -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[0], link))
-    elif sys.platform == "linux":
-        os.system('youtube-dl -i -f bestaudio --extract-audio --no-playlist -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[0], link))
+    if "playlist" in link:
+        print("Invalid URL. Please do not supply this function with a direct playlist link.")
+        return 0
     else:
-        return "Something went wrong."
+        if sys.platform == "win32":
+            os.system('youtube-dl -i -f bestaudio --extract-audio --no-playlist -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[0], link))
+        elif sys.platform == "linux":
+            os.system('youtube-dl -i -f bestaudio --extract-audio --no-playlist -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[0], link))
+        else:
+            return "Something went wrong."
 
 def downloadVideoHighestQuality(video_link):
     #This function gives you the highest quality video and audio seperately merged into a single file
@@ -90,22 +94,30 @@ def downloadVideoHighestQuality(video_link):
 def downloadMP3(audio_link):
     #This function downloads the audio at its highest quality and converts it to MP3
     link = '"' + str(audio_link) + '"'
-    if sys.platform == "win32":
-        os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format mp3 --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[5], link))
-    elif sys.platform == "linux":
-        os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format mp3 --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[5], link))
+    if "playlist" in link:
+        print("Invalid URL. Please do not supply this function with a direct playlist link.")
+        return 0
     else:
-        return "Something went wrong."
+        if sys.platform == "win32":
+            os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format mp3 --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[5], link))
+        elif sys.platform == "linux":
+            os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format mp3 --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[5], link))
+        else:
+            return "Something went wrong."
 
 def downloadWAV(audio_link):
     #This function downloads the audio at its highest quality and converts it to WAV
     link = '"' + str(audio_link) + '"'
-    if sys.platform == "win32":
-        os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format wav --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[6], link))
-    elif sys.platform == "linux":
-        os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format wav --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[6], link))
+        if "playlist" in link:
+        print("Invalid URL. Please do not supply this function with a direct playlist link.")
+        return 0
     else:
-        return "Something went wrong."
+        if sys.platform == "win32":
+            os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format wav --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(win_path + folders[6], link))
+        elif sys.platform == "linux":
+            os.system('youtube-dl -i -f bestaudio --no-playlist --extract-audio --audio-format wav --audio-quality 0 -o "{}/%(title)s.%(ext)s" {}'.format(unix_path + folders[6], link))
+        else:
+            return "Something went wrong."
 
 def downloadPlaylistAudio(playlist_link):
     #This function downloads a playlist as the highest possible audio quality (can be webm, mp4 or mp3/WAV)
