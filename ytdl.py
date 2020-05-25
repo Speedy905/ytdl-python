@@ -108,7 +108,7 @@ def downloadMP3(audio_link):
 def downloadWAV(audio_link):
     #This function downloads the audio at its highest quality and converts it to WAV
     link = '"' + str(audio_link) + '"'
-        if "playlist" in link:
+    if "playlist" in link:
         print("Invalid URL. Please do not supply this function with a direct playlist link.")
         return 0
     else:
